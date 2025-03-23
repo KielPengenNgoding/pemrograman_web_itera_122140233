@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Lanjutan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .calculator {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .calculator input {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .calculator .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .calculator .buttons button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #3b82f6;
+            color: white;
+            cursor: pointer;
+        }
+        .calculator .buttons button:hover {
+            background-color: #2563eb;
+        }
+        .calculator .advanced-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .calculator .advanced-buttons button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #6366f1;
+            color: white;
+            cursor: pointer;
+        }
+        .calculator .advanced-buttons button:hover {
+            background-color: #4f46e5;
+        }
+        .calculator #hasil-kalkulator {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kalkulator Lanjutan</h1>
+    <div class="calculator">
+        <div>
+            <input type="number" id="angka1" placeholder="Angka 1">
+            <input type="number" id="angka2" placeholder="Angka 2">
+        </div>
+        <div class="buttons">
+            <button id="btn-tambah">+</button>
+            <button id="btn-kurang">-</button>
+            <button id="btn-kali">×</button>
+            <button id="btn-bagi">÷</button>
+        </div>
+        <div class="advanced-buttons">
+            <button id="btn-pangkat">x^y</button>
+            <button id="btn-akar">√x</button>
+            <button id="btn-modulus">mod</button>
+        </div>
+        <div id="hasil-kalkulator"></div>
+    </div>
+
+    <script>
+        // Fungsi untuk kalkulator
+        function hitungKalkulator(angka1, angka2, operasi) {
+            let hasil = 0;
+            let errorMsg = null;
+            
+            switch (operasi) {
+                case "tambah":
+                    hasil = angka1 + angka2;
+                    break;
+                case "kurang":
+                    hasil = angka1 - angka2;
+                    break;
+                case "kali":
+                    hasil = angka1 * angka2;
+                    break;
+                case "bagi":
+                    if (angka2 === 0) {
+                        errorMsg = "Error: Pembagian dengan nol tidak diperbolehkan";
+                    } else {
+                        hasil = angka1 / angka2;
+                    }
+                    break;
+                case "pangkat":
+                    hasil = Math.pow(angka1, angka2);
+                    break;
+                case "akar":
+                    if (angka1 < 0) {
+                        errorMsg = "Error: Tidak dapat menghitung akar dari bilangan negatif";
+                    } else {
+                        hasil = Math.sqrt(angka1);
+                    }
+                    break;
+                case "modulus":
+                    if (angka2 === 0) {
+                        errorMsg = "Error: Modulus dengan nol tidak diperbolehkan";
+                    } else {
+                        hasil = angka1 % angka2;
+                    }
+                    break;
+                default:
+                    errorMsg = "Operasi tidak valid";
+            }
+            
+            return { hasil, errorMsg };
+        }
+        
+        function validateInput(operation) {
+            const angka1 = parseFloat(document.getElementById("angka1").value);
+            const angka2 = parseFloat(document.getElementById("angka2").value);
+            const hasilElem = document.getElementById("hasil-kalkulator");
+            
+            // Untuk operasi unary (yang hanya memerlukan satu angka)
+            const unaryOperations = ["akar"];
+            const isUnary = unaryOperations.includes(operation);
+            
+            if (isNaN(angka1) || (!isUnary && isNaN(angka2))) {
+                hasilElem.innerHTML = '<p style="color: red;">Masukkan angka yang valid!</p>';
+                return null;
+            }
+            
+            return { angka1, angka2 };
+        }
+        
+        function displayResult(angka1, angka2, operation, result) {
+            const hasilElem = document.getElementById("hasil-kalkulator");
+            
+            if (result.errorMsg) {
+                hasilElem.innerHTML = `<p style="color: red;">${result.errorMsg}</p>`;
+                return;
+            }
+            
+            let operationSymbol = '';
+            let showBothOperands = true;
+            
+            switch (operation) {
+                case "tambah": operationSymbol = "+"; break;
+                case "kurang": operationSymbol = "-"; break;
+                case "kali": operationSymbol = "×"; break;
+                case "bagi": operationSymbol = "÷"; break;
+                case "pangkat": operationSymbol = "^"; break;
+                case "modulus": operationSymbol = "mod"; break;
+                case "akar":
+                    operationSymbol = "√";
+                    showBothOperands = false;
+                    break;
+            }
+            
+            if (showBothOperands) {
+                hasilElem.innerHTML = `<p>Hasil: ${angka1} ${operationSymbol} ${angka2} = ${result.hasil}</p>`;
+            } else {
+                hasilElem.innerHTML = `<p>Hasil: ${operationSymbol}(${angka1}) = ${result.hasil}</p>`;
+            }
+        }
+        
+        document.getElementById("btn-tambah").addEventListener("click", function() {
+            const input = validateInput("tambah");
+            if (input) {
+                const result = hitungKalkulator(input.angka1, input.angka2, "tambah");
+                displayResult(input.angka1, input.angka2, "tambah", result);
+            }
+        });
+        
+        document.getElementById("btn-kurang").addEventListener("click", function() {
+            const input = validateInput("kurang");
+            if (input) {
+                const result = hitungKalkulator(input.angka1, input.angka2, "kurang");
+                displayResult(input.angka1, input.angka2, "kurang", result);
+            }
+        });
+        
+        document.getElementById("btn-kali").addEventListener("click", function() {
+            const input = validateInput("kali");
+            if (input) {
+                const result = hitungKalkulator(input.angka1, input.angka2, "kali");
+                displayResult(input.angka1, input.angka2, "kali", result);
+            }
+        });
+        
+        document.getElementById("btn-bagi").addEventListener("click", function() {
+            const input = validateInput("bagi");
+            if (input) {
+                const result = hitungKalkulator(input.angka1, input.angka2, "bagi");
+                displayResult(input.angka1, input.angka2, "bagi", result);
+            }
+        });
+        
+        document.getElementById("btn-pangkat").addEventListener("click", function() {
+            const input = validateInput("pangkat");
+            if (input) {
+                const result = hitungKalkulator(input.angka1, input.angka2, "pangkat");
+                displayResult(input.angka1, input.angka2, "pangkat", result);
+            }
+        });
+        
+        document.getElementById("btn-akar").addEventListener("click", function() {
+            const input = validateInput("akar");
+            if (input) {
+                const result = hitungKalkulator(input.angka1, input.angka2, "akar");
+                displayResult(input.angka1, input.angka2, "akar", result);
+            }
+        });
+        
+        document.getElementById("btn-modulus").addEventListener("click", function() {
+            const input = validateInput("modulus");
+            if (input) {
+                const result = hitungKalkulator(input.angka1, input.angka2, "modulus");
+                displayResult(input.angka1, input.angka2, "modulus", result);
+            }
+        });
+    </script>
+</body>
+</html>
