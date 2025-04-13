@@ -24,6 +24,7 @@ Info Cuaca:
     -Tombol refresh untuk memperbarui data cuaca
 
 Screenshot Dashboard
+![image](https://github.com/user-attachments/assets/ac737b87-cd3a-46a2-ba11-71b15970cb7d)
 
 
 Teknologi dan Fitur ES6+ yang Digunakan
