@@ -1,6 +1,6 @@
-# Aplikasi Manajemen Buku Pribadi
+# Aplikasi Manajemen Buku Pribadi (BukuSontang)
 
-Aplikasi manajemen buku pribadi yang memungkinkan pengguna mencatat buku-buku yang dimiliki, sedang dibaca, atau ingin dibeli. Aplikasi ini dikembangkan menggunakan React dengan pendekatan modern (functional components dan hooks).
+Aplikasi BukuSontang yang memungkinkan pengguna mencatat buku-buku yang dimiliki, sedang dibaca, atau ingin dibeli. Aplikasi ini dikembangkan menggunakan React dengan pendekatan modern (functional components dan hooks).
 
 ## Sreenshoot Aplikasi
 ![image](https://github.com/user-attachments/assets/2d2187f1-87df-48e1-a314-216bddbdc1ed)
@@ -58,8 +58,8 @@ Aplikasi manajemen buku pribadi yang memungkinkan pengguna mencatat buku-buku ya
 
 1. Clone repositori ini:
    ```bash
-   git clone https://github.com/username/book-management-app.git
-   cd book-management-app
+   git clone https://github.com/username/Ferdinand_122140233_pertemuan3.git
+   cd Ferdinand_122140233_pertemuan3
    ```
 
 2. Install dependensi:
