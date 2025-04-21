@@ -2,7 +2,11 @@
 
 Aplikasi manajemen buku pribadi yang memungkinkan pengguna mencatat buku-buku yang dimiliki, sedang dibaca, atau ingin dibeli. Aplikasi ini dikembangkan menggunakan React dengan pendekatan modern (functional components dan hooks).
 
-![Screenshot Aplikasi](screenshot.png)
+## Sreenshoot Aplikasi
+![image](https://github.com/user-attachments/assets/2d2187f1-87df-48e1-a314-216bddbdc1ed)
+![image](https://github.com/user-attachments/assets/acace74e-7a4e-4463-84a7-45006721eb11)
+![image](https://github.com/user-attachments/assets/311a9175-3f00-4260-af40-dad38bd91f60)
+![image](https://github.com/user-attachments/assets/fd296025-f973-4aa7-a97e-694d64be0dab)
 
 ## Fitur Aplikasi
 
@@ -75,30 +79,6 @@ Aplikasi manajemen buku pribadi yang memungkinkan pengguna mencatat buku-buku ya
 Untuk menjalankan unit test:
 ```bash
 npm test
-```
-
-## Struktur Folder
-
-```
-src/
-├── components/           # Komponen UI reusable
-│   ├── BookForm/         # Form untuk menambah/edit buku
-│   ├── BookList/         # Tampilan daftar buku
-│   ├── BookFilter/       # Filter dan pencarian
-│   ├── EmptyState/       # Tampilan saat tidak ada data
-│   └── Navbar/           # Navigasi aplikasi
-├── pages/                # Halaman-halaman utama
-│   ├── Home/             # Halaman utama dengan list dan form
-│   └── Stats/            # Halaman statistik koleksi
-├── hooks/                # Custom hooks
-│   ├── useLocalStorage.js # Interaksi dengan localStorage
-│   └── useBookStats.js   # Kalkulasi statistik koleksi
-├── context/              # Context untuk state management
-│   └── BookContext.js    # Provider dan hooks untuk data buku
-├── __tests__/            # Unit tests
-├── App.jsx               # Komponen utama dan setup routing
-├── index.css             # Global styles
-└── main.jsx              # Entry point
 ```
 
 ## Pengembangan Lebih Lanjut
