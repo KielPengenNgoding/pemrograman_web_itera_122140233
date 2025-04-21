@@ -1,0 +1,26 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .btn-add {
+    background-color: var(--accent-primary);
+    color: white;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+  }
+  
+  .btn-add:hover {
+    background-color: var(--accent-secondary);
+  }
+  
+  .form-container {
+    margin-bottom: 32px;
+  }
